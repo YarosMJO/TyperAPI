@@ -10,6 +10,6 @@ namespace TyperAPI.DAL.Models
         [MaxLength(20)]
         public string Name { get; set; }
 
-        public List<Score> Scores { get; set; }
+        public IEnumerable<Score> Scores { get; set; }
     }
 }

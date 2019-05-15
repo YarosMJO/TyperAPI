@@ -16,7 +16,7 @@ namespace TyperAPI.DAL.Models
         [JsonProperty(PropertyName = "Date")]
         public DateTime ScoreDateTime { get; set; }
 
-        public int User { get; set; }
+        public User User { get; set; }
     }
 
 }
