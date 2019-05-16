@@ -1,50 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TyperAPI.DAL.Models;
 
 namespace TyperAPI.DAL.Repositories
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository :BaseRepository , IRepository<User>
     {
         public UserRepository(TyperContext context): base(context)
         {
-        }
-
-        public Task Add(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task AddMany(IEnumerable<User> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<User>> GetAll()
-        {
-            throw new NotImplementedException();
+            
         }
 
         public Task<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.Users.Include(y => y.Scores).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<User> RemoveById(int id)
+        public async Task<IEnumerable<User>> GetAll()
         {
-            throw new NotImplementedException();
+            return await context.Users.Include(x => x.Scores).ToListAsync();
         }
 
-        public Task<User> UpdateById(int id)
+        public async void Add(User entity)
         {
-            throw new NotImplementedException();
+           await context.Users.AddAsync(entity);
         }
 
-        public Task UpdateMany(IEnumerable<User> entities)
+        public async void AddMany(IEnumerable<User> entities)
         {
-            throw new NotImplementedException();
+            foreach (var entity in entities)
+            {
+                await context.Users.AddAsync(entity);
+            }
+        }
+        
+        public async void RemoveById(int id)
+        {
+            var removedItem = await context.Users.Include(y => y.Scores).FirstOrDefaultAsync(x => x.Id == id);
+            if (removedItem == null)
+            {
+                return;
+            }
+            context.Users.Remove(removedItem);
+        }
+
+        public void UpdateById(User entity)
+        {
+             context.Users.Update(entity);
+        }
+
+        public void UpdateMany(IEnumerable<User> entities)
+        {
+            foreach (var entity in entities)
+            {
+                context.Users.Update(entity);
+            }
         }
     }
 }
