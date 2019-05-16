@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TyperAPI.DAL.Models;
@@ -12,7 +10,8 @@ namespace TyperAPI.DAL.Repositories
     {
         public WordRepository(TyperContext context) : base(context)
         {
-
+            //Seeder
+            context.SaveChangesAsync();
         }
 
         public Task<Word> GetById(int id)

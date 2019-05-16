@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using TyperAPI.DAL.Repositories.IUow;
 
 namespace TyperAPI.BL.Services
 {
@@ -17,10 +16,10 @@ namespace TyperAPI.BL.Services
         {
             return await Task.Run(() => repositories.GetRepository<T>().GetAll());
         }
+
         public async Task<T> GetById<T>(int id) where T : class
         {
             return await Task.Run(() => repositories.GetRepository<T>().GetById(id));
-
         }
 
         public async Task Add<T>(T item) where T : class
@@ -30,12 +29,12 @@ namespace TyperAPI.BL.Services
 
         public async Task Update<T>(T item) where T : class
         {
-            await Task.Run(() => repositories.GetRepository<T>().Update(item));
+            await Task.Run(() => repositories.GetRepository<T>().UpdateById(item));
         }
 
         public async Task Remove<T>(int id) where T : class
         {
-            await Task.Run(() => repositories.GetRepository<T>().Remove(id));
+            await Task.Run(() => repositories.GetRepository<T>().RemoveById(id));
         }
 
         public async Task SaveChangesAsync()

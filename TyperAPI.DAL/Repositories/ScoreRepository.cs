@@ -9,7 +9,8 @@ namespace TyperAPI.DAL.Repositories
     {
         public ScoreRepository(TyperContext context) : base(context)
         {
-
+            //Seeder
+            context.SaveChangesAsync();
         }
 
         public Task<Score> GetById(int id)

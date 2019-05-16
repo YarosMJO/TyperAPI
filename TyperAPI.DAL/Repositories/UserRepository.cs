@@ -9,7 +9,8 @@ namespace TyperAPI.DAL.Repositories
     {
         public UserRepository(TyperContext context): base(context)
         {
-            
+            //Seeder
+            context.SaveChangesAsync();
         }
 
         public Task<User> GetById(int id)

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TyperAPI.DAL.Models;
 using TyperAPI.Shared.Configs;
+using TyperAPI.DAL.Repositories.IUow;
+using TyperAPI.BL.Services;
 
 namespace TyperAPI
 {
@@ -35,8 +37,8 @@ namespace TyperAPI
             var config = new AutoMapperConfiguration().Configure().CreateMapper();
             services.AddSingleton(sp => config);
 
-          // add IOW
-          // add base service
+            services.AddScoped<IUow, Uow>();
+            services.AddScoped<BaseService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddFluentValidation();
