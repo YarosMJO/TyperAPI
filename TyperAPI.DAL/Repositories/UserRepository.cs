@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TyperAPI.DAL.Models;
@@ -9,8 +10,14 @@ namespace TyperAPI.DAL.Repositories
     {
         public UserRepository(TyperContext context): base(context)
         {
-            //Seeder
-            context.SaveChangesAsync();
+            Seeder seeder;
+            if (!context.Users.Any())
+            {
+                seeder = new Seeder();
+                SetAll(seeder.Users);
+                context.SaveChangesAsync();
+                
+            }
         }
 
         public Task<User> GetById(int id)
@@ -57,6 +64,11 @@ namespace TyperAPI.DAL.Repositories
             {
                 context.Users.Update(entity);
             }
+        }
+
+        public void SetAll(List<User> entities)
+        {
+            entities.ForEach(x => context.Users.AddAsync(x));
         }
     }
 }

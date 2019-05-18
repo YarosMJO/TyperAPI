@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TyperAPI.DAL.Models;
+﻿using TyperAPI.DAL.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace TyperAPI.DAL.Repositories
 {
     public class BaseRepository
     {
+        public Seeder seeder;
         public TyperContext context;
         public BaseRepository() { }
         public BaseRepository(TyperContext context)
@@ -16,9 +13,8 @@ namespace TyperAPI.DAL.Repositories
             this.context = context;
             context.Database.Migrate();
             context.Database.EnsureCreated();
-            //TODO Seeder.populateData();
-
+            seeder = new Seeder();
         }
-
+       
     }
 }

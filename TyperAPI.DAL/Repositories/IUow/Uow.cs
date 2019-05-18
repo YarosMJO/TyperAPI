@@ -17,19 +17,19 @@ namespace TyperAPI.DAL.Repositories.IUow
             switch (typeof(T).Name)
             {
                 case "User":
-                    return (IRepository<T>) userRepository;
+                    return (IRepository<T>) UserRepository;
                 case "Score":
-                    return (IRepository<T>) scoreRpository;       
+                    return (IRepository<T>) ScoreRepository;       
             }
-            return (IRepository<T>)wordRepository;
+            return (IRepository<T>)WordRepository;
         }
 
-        private IRepository<User> userRepository;
+        private UserRepository userRepository;
         public IRepository<User> UserRepository
         {
             get
             {
-                if (UserRepository==null)
+                if (userRepository==null)
                 {
                     userRepository = new UserRepository(context);
                 }
@@ -38,12 +38,12 @@ namespace TyperAPI.DAL.Repositories.IUow
             }
         }
 
-        private IRepository<Score> scoreRpository;
-        public IRepository<Score> ScoreRpository
+        private ScoreRepository scoreRpository;
+        public IRepository<Score> ScoreRepository
         {
             get
             {
-                if (ScoreRpository == null)
+                if (scoreRpository == null)
                 {
                     scoreRpository = new ScoreRepository(context);
                 }
@@ -52,12 +52,12 @@ namespace TyperAPI.DAL.Repositories.IUow
             }
         }
 
-        private IRepository<Word> wordRepository;
+        private WordRepository wordRepository;
         public IRepository<Word> WordRepository
         {
             get
             {
-                if (WordRepository == null)
+                if (wordRepository == null)
                 {
                     wordRepository = new WordRepository(context);
                 }

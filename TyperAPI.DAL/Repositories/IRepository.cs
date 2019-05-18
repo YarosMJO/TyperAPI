@@ -13,6 +13,8 @@ namespace TyperAPI.DAL.Repositories
         void UpdateMany(IEnumerable<TEntity> entities);
         void Add(TEntity entity);
         void AddMany(IEnumerable<TEntity> entities);
+
+        void SetAll(List<TEntity> entities);
     }
 
     public abstract class Entitybase

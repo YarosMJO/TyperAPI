@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TyperAPI.DAL.Models
 {
-    public class TyperContext : DbContext
+    public sealed class TyperContext : DbContext
     {
         public TyperContext(DbContextOptions<TyperContext> options) :
             base(options)

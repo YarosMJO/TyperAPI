@@ -9,8 +9,7 @@ namespace TyperAPI.DAL.Repositories
     {
         public ScoreRepository(TyperContext context) : base(context)
         {
-            //Seeder
-            context.SaveChangesAsync();
+
         }
 
         public Task<Score> GetById(int id)
@@ -57,6 +56,11 @@ namespace TyperAPI.DAL.Repositories
             {
                 context.Scores.Update(entity);
             }
+        }
+
+        public void SetAll(List<Score> entities)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
